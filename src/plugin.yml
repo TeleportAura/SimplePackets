@@ -1,0 +1,4 @@
+name: SimplePackets
+main: de.teleportaura.simplepackets.internal.SimplePackets
+version: 0.0.1
+author: TeleportAura
