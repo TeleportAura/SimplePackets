@@ -14,6 +14,7 @@ public abstract class PacketEvent<T extends Packet> extends Event {
         this.packet = packet;
     }
 
+
     public boolean isCancelled() {
         return this.cancelled;
     }

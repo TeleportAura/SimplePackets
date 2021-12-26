@@ -8,9 +8,9 @@ public class NettyInjector {
 
     public static void inject(Player p) {
         ChannelPipeline pipeline =
-                ((CraftPlayer)p).getHandle().playerConnection.networkManager.channel.pipeline();
-        pipeline.addAfter("decoder", "SPDecoder", new SPDecoder());
-        pipeline.addAfter("encoder", "SPEncoder", new SPEncoder());
+                ((CraftPlayer) p).getHandle().playerConnection.networkManager.channel.pipeline();
+        pipeline.addAfter("decoder", "SPDecoder", new SPDecoder(p.getUniqueId()));
+        pipeline.addAfter("encoder", "SPEncoder", new SPEncoder(p.getUniqueId()));
     }
 
 }

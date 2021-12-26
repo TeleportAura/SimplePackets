@@ -11,12 +11,12 @@ public class S02PacketChat extends SimplePacketsPacket<PacketPlayOutChat> {
         super(packet);
     }
 
-    public void setMessage(IChatBaseComponent message) {
-        ReflectionUtil.setFieldValue(packet, PacketPlayOutChat.class, "a", message);
-    }
-
     public IChatBaseComponent getMessage() {
         return ReflectionUtil.getFieldValue(packet, PacketPlayOutChat.class, "a", IChatBaseComponent.class);
+    }
+
+    public void setMessage(IChatBaseComponent message) {
+        ReflectionUtil.setFieldValue(packet, PacketPlayOutChat.class, "a", message);
     }
 
 }

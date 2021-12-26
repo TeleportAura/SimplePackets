@@ -8,44 +8,77 @@ import java.util.HashMap;
 
 public class PacketEventManager {
 
-    private HashMap<Class<? extends Packet<?>>, ArrayList<SimplePacketListener<? extends Packet<?>>>> packetHandlers
+    private final HashMap<Class<? extends Packet<?>>, ArrayList<PacketListener>> packetHandlers
             = new HashMap<>();
-    private ArrayList<SimplePacketListener<Packet<?>>> everyPacketHandlers
+    private final ArrayList<PacketListener> everyPacketHandlers
             = new ArrayList<>();
 
 
+    public <T extends Packet<?>> void registerListener(InboundPacketListener<T> packetListener, Class<T> packetClazz) {
+        this.registerListenerInternally(packetListener, packetClazz);
+    }
+
+    public <T extends Packet<?>> void registerListener(OutbountPacketListener<T> packetListener, Class<T> packetClazz) {
+        registerListenerInternally(packetListener, packetClazz);
+    }
+
+    private <T extends Packet<?>> void registerListenerInternally(PacketListener packetListener, Class<T> packetClazz) {
+        if (packetClazz.equals(Packet.class)) {
+            everyPacketHandlers.add(packetListener);
+            return;
+        }
+        ArrayList<PacketListener> list = packetHandlers.get(packetClazz);
+        if (list == null) {
+            list = new ArrayList<>();
+            list.add(packetListener);
+            packetHandlers.put(packetClazz, list);
+        }
+        list.add(packetListener);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T extends Packet<?>> void unregisterListener(InboundPacketListener<T> packetListener, Class<T> packetClazz) {
+        if (packetClazz.equals(Packet.class)) {
+            everyPacketHandlers.remove((InboundPacketListener<Packet<?>>) packetListener);
+            return;
+        }
+        ArrayList<PacketListener> list = packetHandlers.get(packetClazz);
+        if (list == null) return;
+        list.remove(packetListener);
+    }
+
     public <T extends Packet<?>> boolean dispatchInbound(T packet) {
         PacketInboundEvent<T> vanillaPacketEvent = new PacketInboundEvent<>(packet);
-        for(SimplePacketListener<Packet<?>> listener: everyPacketHandlers) {
-            listener.handleInbound(vanillaPacketEvent);
+        for (PacketListener listener : everyPacketHandlers) {
+            listener.handle(vanillaPacketEvent);
         }
-        for(SimplePacketListener<?> listener: packetHandlers.get(packet.getClass())) {
-            listener.handleInbound(vanillaPacketEvent);
+        for (PacketListener listener : packetHandlers.get(packet.getClass())) {
+            listener.handle(vanillaPacketEvent);
         }
-        if(vanillaPacketEvent.isCancelled()) return false;
+        if (vanillaPacketEvent.isCancelled()) return false;
         SimplePacketsPacket<T> simplePacketsPacket = SimplePacketsPacket.get(packet);
-        if(simplePacketsPacket==null) return false;
+        if (simplePacketsPacket == null) return false;
         PacketInboundEvent<SimplePacketsPacket<T>> simplePacketsPacketPacketEvent = new PacketInboundEvent<>(simplePacketsPacket);
-        for(SimplePacketListener<?> listener: packetHandlers.get(simplePacketsPacket.getClass())) {
-            listener.handleInbound(simplePacketsPacketPacketEvent);
+        for (PacketListener listener : packetHandlers.get(simplePacketsPacket.getClass())) {
+            listener.handle(simplePacketsPacketPacketEvent);
         }
         return !simplePacketsPacketPacketEvent.isCancelled();
     }
 
     public <T extends Packet<?>> boolean dispatchOutbound(T packet) {
         PacketOutboundEvent<T> vanillaPacketEvent = new PacketOutboundEvent<>(packet);
-        for(SimplePacketListener<Packet<?>> listener: everyPacketHandlers) {
-            listener.handleOutbound(vanillaPacketEvent);
+        for (PacketListener listener : everyPacketHandlers) {
+            listener.handle(vanillaPacketEvent);
         }
-        for(SimplePacketListener<?> listener: packetHandlers.get(packet.getClass())) {
-            listener.handleOutbound(vanillaPacketEvent);
+        for (PacketListener listener : packetHandlers.get(packet.getClass())) {
+            listener.handle(vanillaPacketEvent);
         }
-        if(vanillaPacketEvent.isCancelled()) return false;
+        if (vanillaPacketEvent.isCancelled()) return false;
         SimplePacketsPacket<T> simplePacketsPacket = SimplePacketsPacket.get(packet);
-        if(simplePacketsPacket==null) return false;
+        if (simplePacketsPacket == null) return false;
         PacketOutboundEvent<SimplePacketsPacket<T>> simplePacketsPacketPacketEvent = new PacketOutboundEvent<>(simplePacketsPacket);
-        for(SimplePacketListener<?> listener: packetHandlers.get(simplePacketsPacket.getClass())) {
-            listener.handleOutbound(simplePacketsPacketPacketEvent);
+        for (PacketListener listener : packetHandlers.get(simplePacketsPacket.getClass())) {
+            listener.handle(simplePacketsPacketPacketEvent);
         }
         return !simplePacketsPacketPacketEvent.isCancelled();
     }

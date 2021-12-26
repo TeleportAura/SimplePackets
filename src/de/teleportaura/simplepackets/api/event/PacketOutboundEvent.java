@@ -12,11 +12,12 @@ public class PacketOutboundEvent<T extends Packet> extends PacketEvent<T> {
         super(packet);
     }
 
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
     @Override
     public HandlerList getHandlers() {
         return getHandlerList();
-    }
-    public static HandlerList getHandlerList() {
-        return handlers;
     }
 }

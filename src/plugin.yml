@@ -1,4 +1,4 @@
 name: SimplePackets
-main: de.teleportaura.simplepackets.internal.SimplePackets
+main: de.teleportaura.simplepackets.internal.SimplePacketsPlugin
 version: 0.0.1
 author: TeleportAura
