@@ -6,6 +6,7 @@ import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
 
 public class PacketEventManager {
 
@@ -47,8 +48,8 @@ public class PacketEventManager {
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends Packet<?>> boolean dispatchInbound(T packet) {
-        PacketInboundEvent<T> vanillaPacketEvent = new PacketInboundEvent<>(packet);
+    public <T extends Packet<?>> boolean dispatchInbound(T packet, UUID player) {
+        PacketInboundEvent<T> vanillaPacketEvent = new PacketInboundEvent<>(packet, player);
         for (PacketListener listener : everyPacketHandlers) {
             listener.handle(vanillaPacketEvent);
         }
@@ -58,7 +59,7 @@ public class PacketEventManager {
         if (vanillaPacketEvent.isCancelled()) return false;
         SimplePacketsPacket<T> simplePacketsPacket = (SimplePacketsPacket<T>) SimplePacketsPacket.get(packet);
         if (simplePacketsPacket == null) return true;
-        PacketInboundEvent<SimplePacketsPacket<T>> simplePacketsPacketPacketEvent = new PacketInboundEvent<>(simplePacketsPacket);
+        PacketInboundEvent<SimplePacketsPacket<T>> simplePacketsPacketPacketEvent = new PacketInboundEvent<>(simplePacketsPacket, player);
         for (PacketListener listener : packetHandlers.getOrDefault(simplePacketsPacket.getClass(), new ArrayList<>())) {
             listener.handle(simplePacketsPacketPacketEvent);
         }
@@ -66,8 +67,8 @@ public class PacketEventManager {
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends Packet<?>> boolean dispatchOutbound(T packet) {
-        PacketOutboundEvent<T> vanillaPacketEvent = new PacketOutboundEvent<>(packet);
+    public <T extends Packet<?>> boolean dispatchOutbound(T packet, UUID player) {
+        PacketOutboundEvent<T> vanillaPacketEvent = new PacketOutboundEvent<>(packet, player);
         for (PacketListener listener : everyPacketHandlers) {
             listener.handle(vanillaPacketEvent);
         }
@@ -77,7 +78,7 @@ public class PacketEventManager {
         if (vanillaPacketEvent.isCancelled()) return false;
         SimplePacketsPacket<T> simplePacketsPacket = (SimplePacketsPacket<T>) SimplePacketsPacket.get(packet);
         if (simplePacketsPacket == null) return true;
-        PacketOutboundEvent<SimplePacketsPacket<T>> simplePacketsPacketPacketEvent = new PacketOutboundEvent<>(simplePacketsPacket);
+        PacketOutboundEvent<SimplePacketsPacket<T>> simplePacketsPacketPacketEvent = new PacketOutboundEvent<>(simplePacketsPacket, player);
         for (PacketListener listener : packetHandlers.getOrDefault(simplePacketsPacket.getClass(), new ArrayList<>())) {
             listener.handle(simplePacketsPacketPacketEvent);
         }

@@ -19,7 +19,7 @@ public class SPDecoder extends MessageToMessageDecoder<Packet> {
 
     @Override
     protected void decode(ChannelHandlerContext channelHandlerContext, Packet packet, List<Object> list) {
-        if(SimplePacketsPlugin.instance().eventManager.dispatchInbound(packet))
+        if(SimplePacketsPlugin.instance().eventManager.dispatchInbound(packet, uuid))
         list.add(packet);
     }
 }

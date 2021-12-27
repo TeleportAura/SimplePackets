@@ -12,10 +12,6 @@ import java.io.IOException;
 public class SimplePacketsPacket<T extends Packet> implements Packet {
 
 
-    public static void main(String[] args) {
-
-    }
-
     protected T packet;
 
     public SimplePacketsPacket(T packet) {

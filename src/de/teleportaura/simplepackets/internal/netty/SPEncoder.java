@@ -19,17 +19,13 @@ public class SPEncoder extends MessageToMessageEncoder<Packet> {
     }
 
     /*TODO make this approach more clean by making the write method do the work thus rendering encode useless
-    *  and bypassing netty's interal checks*/
+    *  and bypassing netty's internal checks*/
 
-    public void write(ChannelHandlerContext channelHandlerContext, Object o, ChannelPromise channelPromise) {
-        try{
-            super.write(channelHandlerContext, o, channelPromise);
-        }catch(Throwable ignored){}
+    public void write(ChannelHandlerContext chCtx, Object packet, ChannelPromise channelPromise) throws Exception {
+        if(SimplePacketsPlugin.instance().eventManager.dispatchOutbound((Packet<?>) packet, uuid))
+            chCtx.write(packet, channelPromise);
     }
 
     @Override
-    protected void encode(ChannelHandlerContext channelHandlerContext, Packet packet, List<Object> list) {
-        if(SimplePacketsPlugin.instance().eventManager.dispatchOutbound(packet))
-            list.add(packet);
-    }
+    protected void encode(ChannelHandlerContext channelHandlerContext, Packet packet, List<Object> list) {}
 }
