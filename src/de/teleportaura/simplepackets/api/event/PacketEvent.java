@@ -8,12 +8,16 @@ public abstract class PacketEvent<T extends Packet> extends Event {
 
     protected T packet;
 
-    protected boolean cancelled;
+    protected boolean cancelled = false;
 
     public PacketEvent(T packet) {
         this.packet = packet;
     }
 
+
+    public T getPacket() {
+        return packet;
+    }
 
     public boolean isCancelled() {
         return this.cancelled;

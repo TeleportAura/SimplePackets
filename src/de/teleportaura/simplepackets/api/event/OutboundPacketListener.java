@@ -4,13 +4,13 @@ import net.minecraft.server.v1_8_R3.Packet;
 import org.bukkit.event.Event;
 
 @SuppressWarnings("rawtypes")
-public interface InboundPacketListener<T extends Packet> extends PacketListener{
+public interface OutboundPacketListener<T extends Packet> extends PacketListener{
 
     @SuppressWarnings("unchecked")
     default void handle(Event e) {
-        handleInbound((PacketInboundEvent<T>) e);
+        handleOutbound((PacketOutboundEvent<T>) e);
     }
 
-    void handleInbound(PacketInboundEvent<T> e);
+    void handleOutbound(PacketOutboundEvent<T> e);
 
 }

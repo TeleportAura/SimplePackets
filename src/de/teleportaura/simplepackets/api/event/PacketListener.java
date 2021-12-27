@@ -4,6 +4,8 @@ import org.bukkit.event.Event;
 
 public interface PacketListener {
 
-    default void handle(Event e){}
+    default void handle(Event e){
+        System.out.println("nonononono");
+    }
 
 }

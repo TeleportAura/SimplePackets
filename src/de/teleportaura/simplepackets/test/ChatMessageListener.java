@@ -1,16 +1,15 @@
 package de.teleportaura.simplepackets.test;
 
-import de.teleportaura.simplepackets.api.event.PacketInboundEvent;
+import de.teleportaura.simplepackets.api.event.OutboundPacketListener;
 import de.teleportaura.simplepackets.api.event.PacketOutboundEvent;
-import de.teleportaura.simplepackets.api.event.InboundPacketListener;
 import de.teleportaura.simplepackets.api.packet.impl.s2c.S02PacketChat;
+import net.minecraft.server.v1_8_R3.ChatMessage;
 
-public class ChatMessageListener implements InboundPacketListener<S02PacketChat> {
-
+public class ChatMessageListener implements OutboundPacketListener<S02PacketChat> {
 
     @Override
-    public void handleInbound(PacketInboundEvent e) {
-
+    public void handleOutbound(PacketOutboundEvent<S02PacketChat> e) {
+        e.getPacket().setMessage(new ChatMessage("hehe boi"));
     }
 
 }

@@ -11,19 +11,26 @@ import java.io.IOException;
 @SuppressWarnings("rawtypes")
 public class SimplePacketsPacket<T extends Packet> implements Packet {
 
+
+    public static void main(String[] args) {
+
+    }
+
     protected T packet;
 
     public SimplePacketsPacket(T packet) {
         this.packet = packet;
     }
 
-    public static <A extends Packet> SimplePacketsPacket<A> get(A packet) {
-        return null;
+
+    public static SimplePacketsPacket get(Packet packet) {
+        switch (packet.getClass().getName()) {
+            case "net.minecraft.server.v1_8_R3.PacketPlayOutChat":
+                return new S02PacketChat((PacketPlayOutChat) packet);
+            default: return null;
+        }
     }
 
-    public static SimplePacketsPacket<PacketPlayOutChat> get(PacketPlayOutChat packet) {
-        return new S02PacketChat(packet);
-    }
 
     @Override
     public void a(PacketDataSerializer packetDataSerializer) throws IOException {
