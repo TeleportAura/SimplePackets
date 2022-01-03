@@ -7,7 +7,7 @@ for mini game or pvp servers on 1.8.x. That means that I will try to make this c
 anticheat and every cloud system I can get access to.
 
 # Downloads
-The plugin can be downloaded on the releases page here.
+The plugin can be downloaded on the releases page [here](https://github.com/TeleportAura/SimplePackets/releases).
 
 # Documentation
 A documentatation of the SimplePackets API can be found at the Wiki [here](https://github.com/TeleportAura/SimplePackets/wiki).
