@@ -10,10 +10,10 @@ anticheat and every cloud system I can get access to.
 The plugin can be downloaded on the releases page here.
 
 # Documentation
-A documentatation of the SimplePackets API can be found at the Wiki [here](wiki).
+A documentatation of the SimplePackets API can be found at the Wiki [here](https://github.com/TeleportAura/SimplePackets/wiki).
 
 # Issues/Suggestions
-In case you found an issue or have a suggestion, feel free to post it [here](issues).
+In case you found an issue or have a suggestion, feel free to post it [here](https://github.com/TeleportAura/SimplePackets/issues).
 There is no specific template for anything, just make sure that all relevant
 information is included. (And please also note that I may sometimes
 respond only after serval days. However, I will answer to everything as
