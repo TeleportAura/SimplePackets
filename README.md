@@ -10,10 +10,10 @@ anticheat and every cloud system I can get access to.
 The plugin can be downloaded on the releases page here.
 
 # Documentation
-A documentatation of the SimplePackets API can be found at the Wiki here.
+A documentatation of the SimplePackets API can be found at the Wiki [here](wiki).
 
 # Issues/Suggestions
-In case you found an issue or have a suggestion, feel free to post it here.
+In case you found an issue or have a suggestion, feel free to post it [here](issues).
 There is no specific template for anything, just make sure that all relevant
 information is included. (And please also note that I may sometimes
 respond only after serval days. However, I will answer to everything as
