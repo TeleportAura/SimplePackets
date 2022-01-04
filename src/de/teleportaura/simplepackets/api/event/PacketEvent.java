@@ -1,5 +1,6 @@
 package de.teleportaura.simplepackets.api.event;
 
+import de.teleportaura.simplepackets.api.SimplePacketsPlayer;
 import net.minecraft.server.v1_8_R3.Packet;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -27,7 +28,11 @@ public abstract class PacketEvent<T extends Packet> extends Event {
         return player;
     }
 
-    public Player getPlayer() {
+    public SimplePacketsPlayer getPlayer() {
+        return SimplePacketsPlayer.fromUUID(player);
+    }
+
+    public Player getBukkitPlayer() {
         return Bukkit.getPlayer(player);
     }
 

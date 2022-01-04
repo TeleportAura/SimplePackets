@@ -2,7 +2,6 @@ package de.teleportaura.simplepackets.api.event;
 
 import de.teleportaura.simplepackets.api.packet.SimplePacketsPacket;
 import net.minecraft.server.v1_8_R3.Packet;
-import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +22,17 @@ public class PacketEventManager {
         registerListenerInternally(packetListener, packetClazz);
     }
 
-    private <T extends Packet<?>> void registerListenerInternally(PacketListener packetListener, Class<T> packetClazz) {
+    public void unregisterListener(PacketListener listener, Class<? extends Packet<?>> packetClazz) {
+        if (packetClazz.equals(Packet.class)) {
+            everyPacketHandlers.remove(listener);
+            return;
+        }
+        ArrayList<PacketListener> list = packetHandlers.get(packetClazz);
+        if (list == null) return; /*foolproof*/
+        list.remove(listener);
+    }
+
+    public <T extends Packet<?>> void registerListenerInternally(PacketListener packetListener, Class<T> packetClazz) {
         if (packetClazz.equals(Packet.class)) {
             everyPacketHandlers.add(packetListener);
             return;

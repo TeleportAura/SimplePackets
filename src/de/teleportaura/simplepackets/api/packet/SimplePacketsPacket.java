@@ -11,13 +11,11 @@ import java.io.IOException;
 @SuppressWarnings("rawtypes")
 public class SimplePacketsPacket<T extends Packet> implements Packet {
 
-
     protected T packet;
 
     public SimplePacketsPacket(T packet) {
         this.packet = packet;
     }
-
 
     public static SimplePacketsPacket get(Packet packet) {
         switch (packet.getClass().getName()) {
@@ -26,7 +24,6 @@ public class SimplePacketsPacket<T extends Packet> implements Packet {
             default: return null;
         }
     }
-
 
     @Override
     public void a(PacketDataSerializer packetDataSerializer) throws IOException {
