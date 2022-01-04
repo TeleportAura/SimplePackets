@@ -27,7 +27,7 @@ public class SimplePacketsAPI {
         return SimplePacketsPlayer.fromUUID(id);
     }
 
-    static class Unsafe {
+    public static class Unsafe {
 
         public static void registerListenerUnsafe(PacketListener packetListener, Class<Packet<?>> packetClazz) {
             SimplePacketsPlugin.instance().eventManager.registerListenerInternally(packetListener, packetClazz);
