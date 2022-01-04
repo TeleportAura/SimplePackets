@@ -18,6 +18,7 @@ public abstract class PacketEvent<T extends Packet> extends Event {
 
     public PacketEvent(T packet, UUID player) {
         this.packet = packet;
+        this.player = player;
     }
 
     public T getPacket() {
