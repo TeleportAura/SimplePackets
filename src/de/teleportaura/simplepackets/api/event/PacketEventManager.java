@@ -14,6 +14,12 @@ public class PacketEventManager {
     private final ArrayList<PacketListener> everyPacketHandlers
             = new ArrayList<>();
 
+    public void onDisable() {
+        packetHandlers.clear();
+        everyPacketHandlers.clear();
+    }
+
+
     public <T extends Packet<?>> void registerListener(InboundPacketListener<T> packetListener, Class<T> packetClazz) {
         this.registerListenerInternally(packetListener, packetClazz);
     }
@@ -42,18 +48,9 @@ public class PacketEventManager {
             list = new ArrayList<>();
             list.add(packetListener);
             packetHandlers.put(packetClazz, list);
-        }
-        list.add(packetListener);
-    }
-
-    public <T extends Packet<?>> void unregisterListener(InboundPacketListener<T> packetListener, Class<T> packetClazz) {
-        if (packetClazz.equals(Packet.class)) {
-            everyPacketHandlers.remove(packetListener);
             return;
         }
-        ArrayList<PacketListener> list = packetHandlers.get(packetClazz);
-        if (list == null) return;
-        list.remove(packetListener);
+        list.add(packetListener);
     }
 
     @SuppressWarnings("unchecked")

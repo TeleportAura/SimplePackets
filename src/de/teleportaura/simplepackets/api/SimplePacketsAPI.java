@@ -29,8 +29,9 @@ public class SimplePacketsAPI {
 
     public static class Unsafe {
 
-        public static void registerListenerUnsafe(PacketListener packetListener, Class<Packet<?>> packetClazz) {
-            SimplePacketsPlugin.instance().eventManager.registerListenerInternally(packetListener, packetClazz);
+        @SuppressWarnings("unchecked")
+        public static void registerListenerUnsafe(PacketListener packetListener, Class<?> packetClazz) {
+            SimplePacketsPlugin.instance().eventManager.registerListenerInternally(packetListener, (Class<? extends Packet<?>>) packetClazz);
         }
 
         public static void unregisterListener(PacketListener listener, Class<Packet<?>> packetClazz) {
