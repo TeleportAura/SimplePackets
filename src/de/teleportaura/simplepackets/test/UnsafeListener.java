@@ -1,7 +1,7 @@
 package de.teleportaura.simplepackets.test;
 
-import de.teleportaura.simplepackets.api.event.InboundPacketListener;
-import de.teleportaura.simplepackets.api.event.PacketInboundEvent;
+import de.teleportaura.simplepackets.api.event.events.PacketInboundEvent;
+import de.teleportaura.simplepackets.api.event.listeners.InboundPacketListener;
 import net.minecraft.server.v1_8_R3.PacketPlayInArmAnimation;
 import org.bukkit.Bukkit;
 

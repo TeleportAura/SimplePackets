@@ -1,4 +1,4 @@
-package de.teleportaura.simplepackets.api.event;
+package de.teleportaura.simplepackets.api.event.events;
 
 import net.minecraft.server.v1_8_R3.Packet;
 import org.bukkit.event.HandlerList;

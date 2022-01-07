@@ -1,5 +1,10 @@
 package de.teleportaura.simplepackets.api.event;
 
+import de.teleportaura.simplepackets.api.event.events.PacketInboundEvent;
+import de.teleportaura.simplepackets.api.event.events.PacketOutboundEvent;
+import de.teleportaura.simplepackets.api.event.listeners.InboundPacketListener;
+import de.teleportaura.simplepackets.api.event.listeners.OutboundPacketListener;
+import de.teleportaura.simplepackets.api.event.listeners.PacketListener;
 import de.teleportaura.simplepackets.api.packet.SimplePacketsPacket;
 import net.minecraft.server.v1_8_R3.Packet;
 

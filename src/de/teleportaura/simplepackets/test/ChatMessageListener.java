@@ -1,7 +1,7 @@
 package de.teleportaura.simplepackets.test;
 
-import de.teleportaura.simplepackets.api.event.OutboundPacketListener;
-import de.teleportaura.simplepackets.api.event.PacketOutboundEvent;
+import de.teleportaura.simplepackets.api.event.events.PacketOutboundEvent;
+import de.teleportaura.simplepackets.api.event.listeners.OutboundPacketListener;
 import de.teleportaura.simplepackets.api.packet.impl.s2c.S02PacketChat;
 import net.minecraft.server.v1_8_R3.ChatMessage;
 

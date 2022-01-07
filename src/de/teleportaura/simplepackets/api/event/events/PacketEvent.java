@@ -1,4 +1,4 @@
-package de.teleportaura.simplepackets.api.event;
+package de.teleportaura.simplepackets.api.event.events;
 
 import de.teleportaura.simplepackets.api.SimplePacketsPlayer;
 import net.minecraft.server.v1_8_R3.Packet;
@@ -23,6 +23,11 @@ public abstract class PacketEvent<T extends Packet> extends Event {
 
     public T getPacket() {
         return packet;
+    }
+
+    @SuppressWarnings("unchecked")
+    public <A extends T> A getPacket(Class<A> clazzOfA) {
+        return (A) packet;
     }
 
     public UUID getPlayerUUID() {

@@ -1,7 +1,9 @@
 package de.teleportaura.simplepackets.internal;
 
+import de.teleportaura.simplepackets.api.SimplePacketsAPI;
 import de.teleportaura.simplepackets.api.event.PacketEventManager;
 import de.teleportaura.simplepackets.internal.netty.NettyInjector;
+import de.teleportaura.simplepackets.test.CoolHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,6 +26,7 @@ public class SimplePacketsPlugin extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(this, this);
 
         //test
+        SimplePacketsAPI.registerListener(new CoolHandler());
         /*SimplePacketsAPI.registerListener(new ChatMessageListener(), S02PacketChat.class);
         SimplePacketsAPI.Unsafe.registerListenerUnsafe(new UnsafeListener(), PacketPlayInArmAnimation.class);*/
     }
